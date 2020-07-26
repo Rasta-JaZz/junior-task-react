@@ -1,46 +1,77 @@
 import React from "react"
-import { useEffect } from "react"
 import { connect } from "react-redux"
-import { loadSmallData } from "../redux/AC"
+import { loadSmallData, sortBy, activeCard } from "../redux/AC"
+import _ from "lodash"
+import Loader from "../loader/loader"
 
 function MinTable(props) {
-	useEffect(() => {
+	React.useEffect(() => {
 		props.fetchData()
+		console.log(props.data)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+
+	const handleSort = (e) => {
+		const list = e.target.classList
+		props.sort(e.target.textContent)
+		if (list.value === "asc") {
+			list.remove("asc")
+			list.add("desc")
+		} else {
+			list.remove("desc")
+			list.add("asc")
+		}
+	}
+
+	const handleClick = (id) => {
+		props.card(_.find(props.data, ["id", id]))
+	}
+
+	const getBody = () => {
+		const { data } = props
+		try {
+			return data.map((item) => (
+				<tr key={item.id + Math.random()} onClick={() => handleClick(item.id)}>
+					<th scope="row">{item.id}</th>
+					<td>{item.firstName}</td>
+					<td>{item.lastName}</td>
+					<td>{item.phone}</td>
+					<td>{item.email}</td>
+				</tr>
+			))
+		} catch (error) {}
+	}
+
+	if (props.loading) return <Loader />
+
 	return (
-		<div>
+		<div className="table_border">
 			<table className="table">
 				<thead className="thead-light">
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Имя</th>
-						<th scope="col">Фамилия</th>
-						<th scope="col">Username</th>
+					<tr onClick={(e) => handleSort(e)}>
+						<th scope="col">id</th>
+						<th scope="col">firstName</th>
+						<th scope="col">lastName</th>
+						<th scope="col">phone</th>
+						<th scope="col">email</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>@twitter</td>
-					</tr>
-				</tbody>
+				<tbody>{getBody()}</tbody>
 			</table>
 		</div>
 	)
 }
 
-export default connect(null, { fetchData: loadSmallData })(MinTable)
+export default connect(
+	(state) => ({
+		data: state.data.entities,
+		dir: state.data.dir,
+		loading: state.data.loading,
+		error: state.data.error,
+	}),
+	{
+		fetchData: loadSmallData,
+		sort: sortBy,
+		card: activeCard,
+	}
+)(MinTable)

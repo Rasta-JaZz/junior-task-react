@@ -1,0 +1,13 @@
+.card-position {
+	position: fixed;
+	top: 200px;
+	left: 50px;
+	margin-top: auto;
+}
+.card-body p {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+.card-text {
+	padding-bottom: 10px;
+}

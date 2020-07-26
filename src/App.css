@@ -1,0 +1,34 @@
+.table_border {
+	border: 1px solid #dad8d8;
+	border-radius: 5px;
+	margin-bottom: 150px;
+	cursor: pointer;
+}
+
+thead {
+	cursor: pointer;
+}
+
+.form-inline input {
+	border-radius: 0 4px 4px 0;
+	border-left: 0px;
+}
+
+.form-inline select {
+	border-radius: 4px 0 0 4px;
+}
+
+tbody tr:hover {
+	box-shadow: 8px 5px 8px #dad8d8;
+}
+
+.asc::after {
+	padding-left: 15px;
+	content: "↓";
+	font-size: 22px;
+}
+.desc::after {
+	padding-left: 15px;
+	content: "↑";
+	font-size: 22px;
+}
