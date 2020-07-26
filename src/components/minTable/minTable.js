@@ -1,13 +1,13 @@
 import React from "react"
 import { connect } from "react-redux"
 import { loadSmallData, sortBy, activeCard } from "../redux/AC"
+import { filterEntitiesSelector } from "../redux/selector"
 import _ from "lodash"
 import Loader from "../loader/loader"
 
 function MinTable(props) {
 	React.useEffect(() => {
 		props.fetchData()
-		console.log(props.data)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
@@ -64,7 +64,7 @@ function MinTable(props) {
 
 export default connect(
 	(state) => ({
-		data: state.data.entities,
+		data: filterEntitiesSelector(state),
 		dir: state.data.dir,
 		loading: state.data.loading,
 		error: state.data.error,

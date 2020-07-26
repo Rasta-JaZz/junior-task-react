@@ -15,6 +15,7 @@ import {
 
 const stateProducts = {
 	entities: [],
+	bigEntities: [],
 	loaded: false,
 	loading: false,
 	error: null,
@@ -34,6 +35,7 @@ const fetchData = (state = stateProducts, action) => {
 				break
 			case LOAD_BIG_DATA + START:
 				draft.loading = true
+				draft.entities = []
 				break
 			case LOAD_SMALL_DATA + SUCCESS:
 				draft.entities = _.orderBy([...response], ["id"], [draft.dir])
