@@ -58,7 +58,6 @@ function App(props) {
 					/>
 				</form>
 			</nav>
-
 			{showModal && (
 				<Modal show={handleShow}>
 					<CardInput />
