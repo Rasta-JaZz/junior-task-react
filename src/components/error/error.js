@@ -1,10 +1,10 @@
 import React from "react"
-
+import "./style.css"
 function Error(props) {
 	return (
-		<div>
+		<div className="error">
 			<h1>Что-то пошло не так...</h1>
-			<img src="../img/negative_emoticon_icon_1561.png" alt="error" />
+			<img src={require("../img/negative_emoticon_icon_1561.png")} alt="error" />
 		</div>
 	)
 }

@@ -8,6 +8,7 @@ import Card from "./components/card"
 import Modal from "./components/modal/modal"
 import CardInput from "./components/card/cardInput"
 import LazyTable from "./components/lazyTable"
+import Error from "./components/error/error"
 import "./App.css"
 
 function App(props) {
@@ -17,7 +18,7 @@ function App(props) {
 	const handleChange = (e) => {
 		props.findData(e.target.value)
 	}
-
+	if (props.error) return <Error />
 	return (
 		<div className="container-lg">
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -80,6 +81,7 @@ function App(props) {
 export default connect(
 	(state) => ({
 		data: filterEntitiesSelector(state),
+		error: state.data.error,
 	}),
 	{
 		findData,

@@ -25,7 +25,7 @@ const stateProducts = {
 }
 
 const fetchData = (state = stateProducts, action) => {
-	const { type, payload, response } = action
+	const { type, payload, response, error } = action
 
 	return produce(state, (draft) => {
 		switch (type) {
@@ -48,7 +48,7 @@ const fetchData = (state = stateProducts, action) => {
 				draft.entities = _.orderBy(state.entities, [payload.value], [draft.dir])
 				break
 			case LOAD_SMALL_DATA + FAIL:
-				draft.error = { ...payload.error }
+				draft.error = { ...error }
 				break
 			case GET_CARD:
 				draft.activeCard = { ...payload.card }
