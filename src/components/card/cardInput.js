@@ -8,14 +8,12 @@ function CardInput(props) {
 	const [newPerson, setPerson] = useState({})
 	const [showSuccess, setShowSuccess] = useState(false)
 
-	const handleBlur = (e) => {
+	const handleChange = (e) => {
 		const target = e.target
 		setPerson({
 			...newPerson,
 			[target.name]: target.value,
 		})
-
-		console.log(newPerson)
 	}
 
 	return (
@@ -29,35 +27,35 @@ function CardInput(props) {
 						className="form-control user-form"
 						placeholder="id"
 						name="id"
-						onChange={(e) => handleBlur(e)}
+						onChange={(e) => handleChange(e)}
 					/>
 					<input
 						type="text"
 						className="form-control user-form"
 						placeholder="Имя"
 						name="firstName"
-						onChange={(e) => handleBlur(e)}
+						onChange={(e) => handleChange(e)}
 					/>
 					<input
 						type="text"
 						className="form-control user-form"
 						name="lastName"
 						placeholder="Фамилия"
-						onChange={(e) => handleBlur(e)}
+						onChange={(e) => handleChange(e)}
 					/>
 					<input
 						type="text"
 						className="form-control user-form"
 						name="email"
 						placeholder="email"
-						onChange={(e) => handleBlur(e)}
+						onChange={(e) => handleChange(e)}
 					/>
 					<input
 						type="text"
 						className="form-control user-form"
 						name="phone"
 						placeholder="телефон"
-						onChange={(e) => handleBlur(e)}
+						onChange={(e) => handleChange(e)}
 					/>
 				</form>
 				<button

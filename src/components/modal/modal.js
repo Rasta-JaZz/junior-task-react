@@ -6,9 +6,11 @@ class Modal extends React.Component {
 	componentWillMount() {
 		this.portal = document.createElement("div")
 		document.body.appendChild(this.portal)
+		document.body.style.overflow = "hidden"
 	}
 	componentWillUnmount() {
 		document.body.removeChild(this.portal)
+		document.body.style.overflow = ""
 	}
 	render() {
 		return ReactDOM.createPortal(
