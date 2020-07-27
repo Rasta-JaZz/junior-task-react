@@ -46,7 +46,7 @@ const fetchData = (state = stateProducts, action) => {
 				draft.loading = false
 				break
 			case LOAD_BIG_DATA + FAIL:
-				draft.error = { error }
+				draft.error = { ...error }
 				break
 			case SORT:
 				draft.dir === "asc" ? (draft.dir = "desc") : (draft.dir = "asc")

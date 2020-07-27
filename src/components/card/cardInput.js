@@ -2,18 +2,16 @@ import React from "react"
 import { useState } from "react"
 import { addPerson } from "../redux/AC"
 import { connect } from "react-redux"
+import { useForm } from "react-hook-form"
 import "./cardInput.css"
 
 function CardInput(props) {
-	const [newPerson, setPerson] = useState({})
 	const [showSuccess, setShowSuccess] = useState(false)
 
-	const handleChange = (e) => {
-		const target = e.target
-		setPerson({
-			...newPerson,
-			[target.name]: target.value,
-		})
+	const { register, handleSubmit, watch, errors } = useForm()
+	const onSubmit = (data) => {
+		props.addPerson(data)
+		setShowSuccess(true)
 	}
 
 	return (
@@ -21,53 +19,49 @@ function CardInput(props) {
 			<div className="card-body">
 				<h5 className="card-title">Добавить пользователя</h5>
 				{showSuccess && <p style={{ color: "green" }}>Пользователь добавлен!</p>}
-				<form className="form-group">
+				{errors.id && <span style={{ color: "red" }}>Обязательное поле</span>}
+				<form className="form-group" onSubmit={handleSubmit(onSubmit)}>
 					<input
+						ref={register({ required: true })}
 						type="text"
 						className="form-control user-form"
 						placeholder="id"
 						name="id"
-						onChange={(e) => handleChange(e)}
 					/>
+					{errors.firstName && <span style={{ color: "red" }}>Обязательное поле</span>}
 					<input
+						ref={register({ required: true })}
 						type="text"
 						className="form-control user-form"
 						placeholder="Имя"
 						name="firstName"
-						onChange={(e) => handleChange(e)}
 					/>
+					{errors.lastName && <span style={{ color: "red" }}>Обязательное поле</span>}
 					<input
+						ref={register({ required: true })}
 						type="text"
 						className="form-control user-form"
 						name="lastName"
 						placeholder="Фамилия"
-						onChange={(e) => handleChange(e)}
 					/>
+					{errors.email && <span style={{ color: "red" }}>Обязательное поле</span>}
 					<input
+						ref={register({ required: true })}
 						type="text"
 						className="form-control user-form"
 						name="email"
 						placeholder="email"
-						onChange={(e) => handleChange(e)}
 					/>
+					{errors.phone && <span style={{ color: "red" }}>Обязательное поле</span>}
 					<input
+						ref={register({ required: true })}
 						type="text"
 						className="form-control user-form"
 						name="phone"
 						placeholder="телефон"
-						onChange={(e) => handleChange(e)}
 					/>
+					<input type="submit" className="btn btn-primary float-right" />
 				</form>
-				<button
-					type="submit"
-					className="btn btn-primary float-right"
-					onClick={() => {
-						props.addPerson(newPerson)
-						setShowSuccess(true)
-					}}
-				>
-					Добавить
-				</button>
 			</div>
 		</div>
 	)
