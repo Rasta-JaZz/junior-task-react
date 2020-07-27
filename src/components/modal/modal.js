@@ -12,9 +12,12 @@ class Modal extends React.Component {
 		document.body.removeChild(this.portal)
 		document.body.style.overflow = ""
 	}
+	handleClick = (e) => {
+		if (e.target.classList.value === "modal-window") this.props.show()
+	}
 	render() {
 		return ReactDOM.createPortal(
-			<div className="modal-window">
+			<div className="modal-window" onClick={(e) => this.handleClick(e)}>
 				<button className="btn btn-danger modal__close-button" onClick={this.props.show}>
 					закрыть
 				</button>
