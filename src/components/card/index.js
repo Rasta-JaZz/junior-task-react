@@ -6,7 +6,8 @@ function Card(props) {
 	const { firstName, lastName, email, description, address, phone, id } = props.card
 
 	return (
-		!!props.card.firstName && (
+		!!props.card.firstName &&
+		!!props.card.address && (
 			<div className="card-position">
 				<div className="card" style={{ width: "18rem" }}>
 					<div className="card-body">
