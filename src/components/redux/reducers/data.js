@@ -45,6 +45,9 @@ const fetchData = (state = stateProducts, action) => {
 				draft.entities = _.orderBy([...response], ["id"], [draft.dir])
 				draft.loading = false
 				break
+			case LOAD_BIG_DATA + FAIL:
+				draft.error = { error }
+				break
 			case SORT:
 				draft.dir === "asc" ? (draft.dir = "desc") : (draft.dir = "asc")
 				draft.entities = _.orderBy(state.entities, [payload.value], [draft.dir])
