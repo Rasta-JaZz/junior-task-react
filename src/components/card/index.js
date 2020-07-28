@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import "./card.css"
 
 function Card(props) {
-	const { firstName, lastName, email, description, address, phone, id } = props.card
+	const { firstName, lastName, email, description, address } = props.card
 
 	return (
 		!!props.card.firstName &&

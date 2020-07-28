@@ -16,8 +16,14 @@ function App(props) {
 	const handleShow = () => setShowModal(!showModal)
 
 	const handleChange = (e) => {
+		e.preventDefault()
 		props.findData(e.target.value)
 	}
+
+	const handlePress = (e) => {
+		if (e.key === "Enter") return e.preventDefault()
+	}
+
 	if (props.error) return <Error />
 	return (
 		<div className="container-lg">
@@ -52,9 +58,10 @@ function App(props) {
 					</select>
 					<input
 						className="form-control mr-sm-2"
-						type="search"
+						type="text"
 						placeholder="Поиск"
 						aria-label="Search"
+						onKeyPress={(e) => handlePress(e)}
 						onChange={(e) => handleChange(e)}
 					/>
 				</form>
